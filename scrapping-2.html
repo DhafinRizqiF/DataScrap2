@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="tablestyles.css">
+        <title>Spotify Chart Top 200</title>
+        <!--Import library jquery-->
+        <script
+          src="https://code.jquery.com/jquery-3.6.0.js"
+          integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+          crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <h1>Spotify Chart Top 200</h1>
+        <div id="hasilscraping_json"></div>
+    </body>
+    <script type="text/javascript">
+        $(function(){
+            $.get('./scraping_selenium.json',function(obj){
+                var str = "<table border=1>";
+                str +="<tr><td>Chart</td><td class='tables'>Cover</td><td class='tables'>Judul Lagu</td><td class='tables'>Penyanyi</td><td class='Streams'>Jumlah Streaming</td><td class='tables'>Waktu Scraping</td></tr>";
+                $.each(obj,function(n,hasilscraping){
+                    str +="<tr><td>" + (n+1) + "</td>";
+                    str +="<td>" + "<img src=" + hasilscraping.Image + ">" +"</td>";    
+                    str +="<td>" + hasilscraping.Lagu + "</td>";
+                    str +="<td class='tables'>" + hasilscraping.Penyanyi + "</td>";
+                    str +="<td class='tables'>" + hasilscraping.Jumlah_Streaming + "</td>";
+                    str +="<td class='tables'>" + hasilscraping.Waktu_Scraping + "</td></tr>";
+                });
+                str +="</table>";
+                $('#hasilscraping_json').html(str);
+            });
+        });
+    </script>    
+</html>

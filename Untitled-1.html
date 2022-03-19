@@ -1,0 +1,30 @@
+<html>
+	<head>
+        <link rel="stylesheet" href="tablestyles.css">
+		<title>Hasil Web Scrapping</title>
+        <!--Import library jquery-->
+        <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+	</head>
+	<body>
+        <h1>Headline Republika Online</h1>
+        <div id="headline_json"></div>
+	</body>
+    <script type="text/javascript">
+        $(function(){
+            //mengambil data dari file json
+            $.get('headline.json',function(obj){
+                var str = "<table border=1>";
+                str +="<tr><td>No</td><td class='tables'>Judul Headline</td><td class='tables'>Kategori</td><td class='tables'>Waktu Publish</td><td class='tables'>Waktu Scrapping</td></tr>";
+                $.each(obj,function(n,data){
+                    str +="<tr><td>" + (n+1) + "</td>";
+                    str +="<td>" + data.judul + "</td>";
+                    str +="<td class='tables'>" + data.kategori + "</td>";
+                    str +="<td class='tables'>" + data.waktu_publish + "</td>";
+                    str +="<td class='tables'>" + data.waktu_scraping + "</td></tr>";
+                });
+                str +="</table>";
+                $('#headline_json').html(str);
+            });
+        });
+    </script>
+</html>
